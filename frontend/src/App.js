@@ -1,12 +1,14 @@
-import HelloWorld from './components/registration_form';
 import './App.css';
+import Login from './components/Login';
 
 function App() {
   return (
     <div>
-      <HelloWorld />
+      <h1>Welcome to my App</h1>
+      <Login />
     </div>
   );
+  
 }
 
 export default App;
