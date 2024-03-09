@@ -1,21 +1,31 @@
 import React, { useState } from 'react'
-import { useMutation, gql } from '@apollo/client';
+import { useMutation } from '@apollo/client';
+import { GoogleOAuthProvider, GoogleLogin } from '@react-oauth/google';
+import { LOGIN_MUTATION, GOOGLE_LOGIN } from '../graphql/mutations';
 
 
-const LOGIN_MUTATION = gql`
-  mutation Login($username:String!, $password:String!){
-    login(username:$username, password:$password){
-      authPayload {
-        user {
-          id,
-          username
-        }
-      }
-    }
+
+
+
+export function GoogleLoginButton(){
+  const [googleLogin, { data, error }] = useMutation(GOOGLE_LOGIN)
+  const handleSuccess = (response) => {
+    googleLogin({variables: { token:response.credential }})
   }
-`
+  const clientId = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+  const handleError = () => {
+    console.log("Login Failed", error)
+  }
 
-const Login = () => {
+  return (
+    <GoogleOAuthProvider clientId={clientId}>
+      <GoogleLogin onSuccess={handleSuccess} onError={handleError} />
+    </GoogleOAuthProvider>
+  )
+}
+
+
+export function LoginForm() {
     // Use state to manage input values
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -85,4 +95,3 @@ const Login = () => {
   )
 }
 
-export default Login; 

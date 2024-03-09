@@ -1,5 +1,5 @@
 import graphene
-from .views import Login
+from .views import Login, GoogleLogin
 
 class Query(graphene.ObjectType):
     hello = graphene.String()
@@ -9,6 +9,6 @@ class Query(graphene.ObjectType):
     
 class Mutation(graphene.ObjectType):
     login = Login.Field()
-    
+    googleLogin = GoogleLogin.Field()
 
 schema = graphene.Schema(query=Query, mutation=Mutation)

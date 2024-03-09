@@ -1,11 +1,12 @@
 import './App.css';
-import Login from './components/Login';
+import { LoginForm, GoogleLoginButton } from './components/Login';
 
 function App() {
   return (
     <div>
       <h1>Welcome to my App</h1>
-      <Login />
+      <LoginForm />
+      <GoogleLoginButton />
     </div>
   );
   
